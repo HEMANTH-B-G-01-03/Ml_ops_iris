@@ -1,0 +1,29 @@
+name: CI Pipeline
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v4
+        with:
+          python-version: 3.11
+
+      - name: Go to project folder
+        run: cd hello-world-mlops
+
+      - name: Install dependencies
+        run: |
+          cd hello-world-mlops
+          pip install -r requirements.txt
+
+      - name: Train model
+        run: |
+          cd hello-world-mlops
+          python train.py
